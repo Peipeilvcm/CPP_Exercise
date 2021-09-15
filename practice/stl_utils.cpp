@@ -11,8 +11,8 @@ vector<int> nums = {1,2,3,4} //C++11
 
 vec.front()
 vec.back()
-
 vec.push_back()
+vec.emplace_bac
 vec.pop_back()
 vec.insert()
 vec.erase()//任意位置删除
@@ -22,12 +22,13 @@ vec.swap()
 //翻转
 reverse(vec.begin(), vec.end());
 
+multiset // 红黑树，可以删除某个值的排序
 
 
 // **set
-insert
-find
-erase
+insert(key)
+set_.find(key) != set.end() ！
+erase(key)
 
 set<int> record(vec.begin(),vec.end());
 unordered_set<int> record(vec.begin(),vec.end());//是哈希表实现,O(1)查找,失去数据顺序性 
@@ -43,18 +44,40 @@ pq.push()
 pq.top()
 qp.pop() 
 
-自定义比较 priority_queue<int,vector<int>,function<bool(int,int)> > pq3(myCmp)
+自定义比较 priority_queue<int,vector<int>,function<bool(int,int
+)> > pq3(myCmp)
 bool myCmp(int a,int b){
-	return a%10>b%10; //这样是小根堆 
+	return a%10>b%10; //这样是小根堆, 就是top依次从小至大。
 }
+
+queue
+定义一个queue的变量     queue<Type> M
+查看是否为空范例        M.empty()    是的话返回1，不是返回0;
+从已有元素后面增加元素   M.push()
+输出现有元素的个数      M.size()
+显示第一个元素          M.front()
+显示最后一个元素        M.back()
+清除第一个元素          M.pop()
+M.emplace()
+
+stack
+top()：返回一个栈顶元素的引用，类型为 T&。如果栈为空，返回值未定义。
+push(const T& obj)：可以将对象副本压入栈顶。这是通过调用底层容器的 push_back() 函数完成的。
+push(T&& obj)：以移动对象的方式将对象压入栈顶。这是通过调用底层容器的有右值引用参数的 push_back() 函数完成的。
+pop()：弹出栈顶元素。
+size()：返回栈中元素的个数。
+empty()：在栈中没有元素的情况下返回 true。
+emplace()：用传入的参数调用构造函数，在栈顶生成对象。
 
 
 
 // **map
 insert(make_pair(first,second))
 find
-erase
+erase(key)
 change(map)
+map_[key] = val
+count()
 
 map<string,int> singers ={{"A", 1},{"B", 2}};
 
@@ -78,3 +101,6 @@ regex_match(str, pattern); // 返回bool
 str = str2.substr(index, len);
 if(str.find(str2) == string::npos){...}
 
+// 整数转string
+std::to_string(int a)
+std::stoi(string, nullptr, 16) // stoll, stol

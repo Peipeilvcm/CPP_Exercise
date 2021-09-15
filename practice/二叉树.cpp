@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -11,6 +11,72 @@ struct TreeNode {
 	TreeNode *right;
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+
+// 递归遍历
+void traverse(TreeNode* root){
+	if(root == NULL) return;
+	/* 前序遍历代码位置 */
+	traverse(root->left);
+	/* 中序遍历代码位置 */
+	traverse(root->right);
+	/* 后序遍历代码位置 */
+}
+// 迭代遍历
+void traverse(TreeNode* root){
+	while(...){
+		if(...){
+			/* 前序遍历代码位置 */
+		}
+		if(...){
+			/* 中序遍历代码位置 */
+		}
+		if(...){
+			/* 后序遍历代码位置 */
+		}
+	}
+}
+
+void push_stk(stack<TreeNode*>& stk, TreeNode* root){
+
+	/* 前序遍历代码位置 */
+	stk.push(root);
+	root = root->left;
+}
+
+void traverse(TreeNode* root){
+	stack<TreeNode*> stk;
+	TreeNode* visited = new TreeNode(-1);
+
+	while(!stk.empty()){
+		TreeNode* cur = stk.top();
+
+		if((cur->left == NULL || cur->left == visited)
+			&& cur->right != visited){
+			/* 中序遍历代码位置 */
+			push_stk(stk, cur->right);
+		}
+		// cur 的右子树遍历完了
+		if(cur->right == NULL || cur->right == visited){
+			/* 后序遍历代码位置 */
+			visited = stk.top();
+			stk.pop();
+		}
+	}
+
+	while(...){
+		if(...){
+			/* 前序遍历代码位置 */
+		}
+		if(...){
+			/* 中序遍历代码位置 */
+		}
+		if(...){
+			/* 后序遍历代码位置 */
+		}
+	}
+}
+
+
 
 bool contain(TreeNode* root, int key){
 	if(root == NULL){
