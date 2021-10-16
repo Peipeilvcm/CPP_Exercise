@@ -87,7 +87,7 @@ int binarySearch_1(const vector<int>& arr, int key){
 	return right;
 }
 
-// 查找第一个大于等于key
+// 查找第一个大于等于key  !!!!!!!!!!!!!!!!!!!!!!!!!! 记这个！！！！！！！！！！！
 int binarySearch_2(const vector<int>& arr, int key){
 	int left = 0;
 	int right = arr.size() - 1;

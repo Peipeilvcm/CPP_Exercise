@@ -71,3 +71,51 @@ def iou(gtboxes, dtboxes):
     return intersection / union
 
 
+def kmeans(data, K):
+    """
+    data: input data
+    K: category number
+    """
+    
+    n,d = data.shape
+    cate_list = np.zeros(n)
+    
+    # - random centroid
+    centroid_list = np.random.randn(K,d)
+    
+    is_ok = False
+    lr = 0.5
+    while not is_ok:
+        # for j in range(n):
+        #     nearest_centeroid_index = None
+        #     nearest_centeroid_distance = float('inf')
+            
+        #     for k in range(K):
+        #         dist = np.linalg.norm(centroid_list[k] - data[j])
+        #         if dist < nearest_centeroid_distance:
+        #             nearest_centeroid_distance = dist
+        #             nearest_centeroid_index = k
+        #     cate_list[j] = nearest_centeroid_index
+
+        classifications = np.argmin(((data[:, :, None] - centers.T[None, :, :])**2).sum(axis=1), axis=1)
+        new_centers = np.array([data[classifications == j, :].mean(axis=0) for j in range(k)])
+        
+        # - update centroid_list
+        last_centroid_list = centroid_list.copy()
+        for j in range(K):
+            new_centroid = np.mean(data[cate_list==j], axis=0)
+            centroid_list[j] = centroid_list[j]*lr + new_centroid*(1-lr) 
+        print('centroid_list=', centroid_list)
+            
+        # - visualize
+        plt.scatter(data[:,0], data[:,1], c=cate_list)
+        plt.plot(centroid_list[:,0], centroid_list[:,1], 'r+')
+        plt.show()
+        
+        # - check if need more update
+        diff = np.linalg.norm(np.linalg.norm(centroid_list-last_centroid_list, axis=0))
+        print('diff=', diff)
+        if diff < 0.1:
+            is_ok = True
+
+

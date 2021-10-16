@@ -21,6 +21,27 @@ void quickSort(vector<int> &nums, int left, int right){
 	quickSort(nums, l+1, right);
 }
 
+void topk_partition(vector<int>& nums, int nl, int nr, int k){
+	if(nl >= nr) return;
+	int l = nl, r = l + 1;
+	int povit = nums[nl];
+	while(r <= nr){
+		if(nums[r] < povit){
+			l++;
+			swap(nums[l], nums[r]);
+		}
+		r++;
+	}
+	swap(nums[nl], nums[l]);
+	if(l-nl+1 == k){
+		return;
+	}else if((l-nl+1) < k){
+		partition(nums, l+1, nr, k-(l-nl+1));
+	}else{
+		partition(nums, nl, l-1, k);
+	}
+}
+
 void threeQuickSort(vector<int>& nums,int l,int r){
 	if(l>=r){
 		return;

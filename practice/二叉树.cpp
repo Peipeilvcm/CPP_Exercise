@@ -21,60 +21,74 @@ void traverse(TreeNode* root){
 	traverse(root->right);
 	/* 后序遍历代码位置 */
 }
-// 迭代遍历
-void traverse(TreeNode* root){
-	while(...){
-		if(...){
-			/* 前序遍历代码位置 */
-		}
-		if(...){
-			/* 中序遍历代码位置 */
-		}
-		if(...){
-			/* 后序遍历代码位置 */
-		}
-	}
+
+
+// 颜色标记法
+// 使用颜色标记节点的状态，新节点为白色，已访问的节点为灰色。
+// 如果遇到的节点为白色，则将其标记为灰色，然后将其右子节点、自身、左子节点依次入栈。
+// 如果遇到的节点为灰色，则将节点的值输出
+enum Color {
+    White,
+    Gray
+};
+void pre_traverse(TreeNode* root){
+    stack<pair<TreeNode*, Color> > stk;
+    stk.push(make_pair(root, White));
+    while(!stk.empty()){
+        auto [node, color] = stk.top();
+        stk.pop();
+        if(node == nullptr){
+            continue;
+        }
+        if(color == White){
+            stk.push(make_pair(node->right, White));
+            stk.push(make_pair(node->left, White));
+            stk.push(make_pair(node, Gray)); // 前序
+        }else{
+            cout<<node->val; // visit
+        }
+    }
 }
 
-void push_stk(stack<TreeNode*>& stk, TreeNode* root){
-
-	/* 前序遍历代码位置 */
-	stk.push(root);
-	root = root->left;
+void in_traverse(TreeNode* root){
+    stack<pair<TreeNode*, Color> > stk;
+    stk.push(make_pair(root, White));
+    while(!stk.empty()){
+        auto [node, color] = stk.top();
+        stk.pop();
+        if(node == nullptr){
+            continue;
+        }
+        if(color == White){
+            stk.push(make_pair(node->right, White));
+            stk.push(make_pair(node, Gray)); // 中序
+            stk.push(make_pair(node->left, White));
+        }else{
+            cout<<node->val; // visit
+        }
+    }
 }
 
-void traverse(TreeNode* root){
-	stack<TreeNode*> stk;
-	TreeNode* visited = new TreeNode(-1);
-
-	while(!stk.empty()){
-		TreeNode* cur = stk.top();
-
-		if((cur->left == NULL || cur->left == visited)
-			&& cur->right != visited){
-			/* 中序遍历代码位置 */
-			push_stk(stk, cur->right);
-		}
-		// cur 的右子树遍历完了
-		if(cur->right == NULL || cur->right == visited){
-			/* 后序遍历代码位置 */
-			visited = stk.top();
-			stk.pop();
-		}
-	}
-
-	while(...){
-		if(...){
-			/* 前序遍历代码位置 */
-		}
-		if(...){
-			/* 中序遍历代码位置 */
-		}
-		if(...){
-			/* 后序遍历代码位置 */
-		}
-	}
+void post_traverse(TreeNode* root){
+    stack<pair<TreeNode*, Color> > stk;
+    stk.push(make_pair(root, White));
+    while(!stk.empty()){
+        auto [node, color] = stk.top();
+        stk.pop();
+        if(node == nullptr){
+            continue;
+        }
+        if(color == White){
+            stk.push(make_pair(node, Gray)); // 后序
+            stk.push(make_pair(node->right, White));
+            stk.push(make_pair(node->left, White));
+            
+        }else{
+            cout<<node->val; // visit
+        }
+    }
 }
+
 
 
 

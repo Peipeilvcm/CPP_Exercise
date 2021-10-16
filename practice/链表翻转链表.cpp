@@ -1,5 +1,4 @@
-#include<stdio.h>
-
+#include<bits/stdc++.h>
 using namespace std;
 
 struct ListNode{
@@ -7,6 +6,22 @@ struct ListNode{
 	ListNode *next;
 	ListNode(int x) : val(x),next(NULL) {}
 };
+
+pair<ListNode*, ListNode*> myReverse(ListNode* head, ListNode* tail){
+	if(head == tail){
+		return {head, tail};
+	}
+	ListNode* prev = tail->next;
+	ListNode* cur = head;
+	ListNode* nex;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+	while(prev != tail){
+		nex = cur->next;
+		cur->next = prev;
+		prev = cur;
+		cur = nex;
+	}
+	return {tail, head};
+}
 
 ListNode* createList(int a[], int n){
 	if(n<=0){

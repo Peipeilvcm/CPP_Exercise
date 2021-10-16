@@ -44,11 +44,43 @@ pq.push()
 pq.top()
 qp.pop() 
 
+
+
 自定义比较 priority_queue<int,vector<int>,function<bool(int,int
 )> > pq3(myCmp)
 bool myCmp(int a,int b){
 	return a%10>b%10; //这样是小根堆, 就是top依次从小至大。
 }
+
+
+struct ListNode {
+    int _val;
+    ListNode* _next;
+    ListNode(int val): _val(val), _next(nullptr) {}
+    ListNode(): _val(0), _next(nullptr) {}
+    ListNode(const ListNode& ln){
+        _val = ln.val;
+        _next = ln._next;
+    }
+    ListNode& operator=(const ListNode& ln){
+        _val = ln._val;
+        _next = ln._next;
+        return (*this);
+    }
+    ListNode& operator=(const ListNode& ln) = delete; // 或设置成private
+};
+
+
+struct Status {
+    int val;
+    ListNode *ptr;
+
+    bool operator < (const Status &rhs) const {
+        return val > rhs.val;
+    }
+};
+priority_queue <Status> pq;
+
 
 queue
 定义一个queue的变量     queue<Type> M
@@ -91,6 +123,10 @@ bool Comp(const int& a, const int& b) {
     return a > b;
 }
 sort(vec.begin(), vec.end(), Comp);
+sort(vec.begin(), vec.end(), [](const int& a, const int& b){
+    return a > b;
+});
+
 
 // ** regex
 # include<regex>
@@ -100,6 +136,8 @@ regex_match(str, pattern); // 返回bool
 // ** string
 str = str2.substr(index, len);
 if(str.find(str2) == string::npos){...}
+str.push_back(ch)
+str.pop_back()
 
 // 整数转string
 std::to_string(int a)

@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -325,6 +325,49 @@ int combinationSum4(vector<int>& nums, int target) {
 	}
 	return memo[target];
 }
+
+// 最长回文子序列
+int longestPalindrome(string s){
+	int n = s.size();
+	vector<vector<int> > dp(n, vector<int>(n, 0));
+
+	for(int i = n-1; i >= 0; --i){
+		dp[i][i] = 1;
+		for(int j = i+1; j < n; ++j){
+			if(s[i] == s[j]){
+				dp[i][j] = dp[i+1][j-1] + 2;
+			}else{
+				dp[i][j] = max(dp[i][j-1], dp[i+1][j]);
+			}
+		}
+	}
+	return dp[0][n-1];
+}
+
+// 最长回文子序列2, 两个字符串的非空子序列拼接成回文串
+int longestPalindrome_2(string word1, string word2){
+	string s = word1 + word2;
+	int K = word1.size();
+	int n = s.size();
+	int ans = 0;
+	vector<vector<int> > dp(n, vector<int>(n, 0));
+
+	for(int i = n-1; i >= 0; --i){
+		dp[i][i] = 1;
+		for(int j = i+1; j < n; ++j){
+			if(s[i] == s[j]){
+				dp[i][j] = dp[i+1][j-1] + 2;
+				if(j >= K && i < K){
+					ans = max(ans, dp[i][j]);
+				}
+			}else{
+				dp[i][j] = max(dp[i][j-1], dp[i+1][j]);
+			}
+		}
+	}
+	return ans;
+}
+
 
 int main(){
 	

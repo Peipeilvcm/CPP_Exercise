@@ -1,12 +1,18 @@
-#include<cstdio>
-#include<iostream>
-#include<string>
-#include<cstdint>
-
-#include<queue>
-
+#include<bits/stdc++.h>
 using namespace std;
 
+
+void testt(){
+    string line;
+    getline(cin, line);
+    stringstream ss(line);
+    int x;
+    vector<int> nums;
+    while(ss >> x){
+        nums.push_back(x);
+    }
+    cout<<*max_element(nums.begin(), nums.end());
+}
 
 void input1_c(){
     int a, b;
